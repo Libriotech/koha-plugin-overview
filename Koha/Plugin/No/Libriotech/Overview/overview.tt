@@ -15,7 +15,7 @@
   <li class="list-group-item"><span class="badge">[% libraries %]</span>Libraries</li>
   <li class="list-group-item"><span class="badge">[% patrons %]</span>Patrons</li>
   <li class="list-group-item"><span class="badge">[% records %]</span>Records</li>
-  <li class="list-group-item"><span class="badge">[% items %]</span>Items</li>
+  <li class="list-group-item"><span class="badge">[% items %]</span><a href="run.pl?class=Koha::Plugin::No::Libriotech::Overview&method=report&detail=items">Items</a></li>
   <li class="list-group-item"><span class="badge">[% issues %]</span>Issues</li>
 </ul>
 

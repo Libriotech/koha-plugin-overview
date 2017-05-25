@@ -12,7 +12,7 @@ use C4::Context;
 our $dbh = C4::Context->dbh;
 
 ## Here we set our plugin version
-our $VERSION = 0.01;
+our $VERSION = 0.02;
 
 ## Here is our metadata, some keys are required, some are optional
 our $metadata = {
@@ -51,7 +51,14 @@ sub new {
 sub report {
     my ( $self, $args ) = @_;
     my $cgi = $self->{'cgi'};
-    $self->overview();
+    if ( $cgi->param('detail') ) {
+        if ( $cgi->param('detail') eq 'items' ) {
+            $self->items();
+        }
+    } else {
+        # Default view
+        $self->overview();
+    }
 }
 
 ## These are helper functions that are specific to this plugin
@@ -69,6 +76,25 @@ sub overview {
         records   => _count_table( 'biblio' ),
         items     => _count_table( 'items' ),
         issues    => _count_table( 'issues' ),
+    );
+
+    print $cgi->header();
+    print $template->output();
+}
+
+sub items {
+    my ( $self, $args ) = @_;
+    my $cgi = $self->{'cgi'};
+
+    my $template = $self->get_template({ file => 'items.tt' });
+
+    my $query = "SELECT it.description, i.itype, COUNT(*) AS count FROM items AS i, itemtypes AS it WHERE i.itype = it.itemtype GROUP BY itype";
+    my $sth = $dbh->prepare($query);
+    $sth->execute();
+    my $itypes = $sth->fetchall_arrayref({});
+
+    $template->param(
+        'itypes' => $itypes,
     );
 
     print $cgi->header();

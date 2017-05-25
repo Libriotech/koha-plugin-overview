@@ -1,0 +1,20 @@
+[% INCLUDE 'doc-head-open.inc' %]
+ <title>Koha: Overview Plugin: Items</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+<body>
+[% INCLUDE 'header.inc' %]
+[% INCLUDE 'cat-search.inc' %]
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Home</a> &rsaquo; <a href="/cgi-bin/koha/plugins/plugins-home.pl">Plugins</a> &rsaquo; Overview &rsaquo; Items</div>
+
+<div id="doc3">
+    <h3>Items</h3>
+
+<ul class="list-group" style="width: 30%;">
+  [% FOREACH i IN itypes %]
+  <li class="list-group-item"><span class="badge">[% i.count %]</span>[% i.description %]</li>
+  [% END %]
+</ul>
+
+[% INCLUDE 'intranet-bottom.inc' %]
