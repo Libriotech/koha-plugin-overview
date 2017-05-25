@@ -32,9 +32,9 @@ var config = {
         datasets: [{
             data: [ 4, 7, 9 ],
             backgroundColor: [
-                'red',.
                 'red',
-                'red',
+                'blue',
+                'green',
             ],
             label: 'Items'
         }],
