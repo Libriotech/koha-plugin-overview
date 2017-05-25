@@ -12,7 +12,7 @@ use C4::Context;
 our $dbh = C4::Context->dbh;
 
 ## Here we set our plugin version
-our $VERSION = 0.01;
+our $VERSION = 0.02;
 
 ## Here is our metadata, some keys are required, some are optional
 our $metadata = {

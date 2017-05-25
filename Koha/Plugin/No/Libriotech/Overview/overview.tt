@@ -20,4 +20,43 @@
 <li>Issues:    [% issues %]</li>
 </ul>
 
+<div id="canvas-holder" style="height:200px; width:200px">
+    <canvas id="chart-area" />
+</div>
+
+<script>
+
+var config = {
+    type: 'pie',
+    data: {
+        datasets: [{
+            data: [ 4, 7, 9 ],
+            backgroundColor: [
+                'red',.
+                'red',
+                'red',
+            ],
+            label: 'Items'
+        }],
+        labels: [
+            "A",
+            "B",
+            "C",
+        ]
+    },
+    options: {
+        responsive: true,
+        legend: {
+            position: 'right',
+        },
+    }
+};
+
+window.onload = function() {
+    var ctx = document.getElementById("chart-area").getContext("2d");
+    window.myPie = new Chart(ctx, config);
+};
+
+</script>
+
 [% INCLUDE 'intranet-bottom.inc' %]
