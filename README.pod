@@ -1,0 +1,39 @@
+=pod
+
+=head1 INTRODUCTION
+
+A simple plugin to provide an overview of some key statistics for your Koha instance.
+
+=head1 DOWNLOADING
+
+https://github.com/Libriotech/koha-plugin-overview/releases
+
+=head1 INSTALLING
+
+Koha's Plugin System allows for you to add additional tools and reports to Koha
+that are specific to your library. Plugins are installed by uploading KPZ
+( Koha Plugin Zip ) packages. A KPZ file is just a zip file containing the perl
+files, template files, and any other files necessary to make the plugin work.
+
+The plugin system needs to be turned on by a system administrator.
+
+To set up the Koha plugin system you must first make some changes to your install.
+
+=over 4
+
+=item * Change `<enable_plugins>0<enable_plugins>` to `<enable_plugins>1</enable_plugins>` in your koha-conf.xml file
+
+=item * Confirm that the path to `<pluginsdir>` exists, is correct, and is writable by the web server
+
+=item * Restart your webserver
+
+=back
+
+Once set up is complete you will need to alter your UseKohaPlugins system 
+preference. On th Reports page you will see the Reports Plugins.
+
+=head1 LICENSE
+
+See the LICENSE file.
+
+=cut
