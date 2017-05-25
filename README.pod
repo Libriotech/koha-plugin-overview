@@ -21,9 +21,9 @@ To set up the Koha plugin system you must first make some changes to your instal
 
 =over 4
 
-=item * Change `<enable_plugins>0<enable_plugins>` to `<enable_plugins>1</enable_plugins>` in your koha-conf.xml file
+=item * Change <enable_plugins>0<enable_plugins> to <enable_plugins>1</enable_plugins> in your koha-conf.xml file
 
-=item * Confirm that the path to `<pluginsdir>` exists, is correct, and is writable by the web server
+=item * Confirm that the path to <pluginsdir> exists, is correct, and is writable by the web server
 
 =item * Restart your webserver
 
