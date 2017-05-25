@@ -1,5 +1,6 @@
 [% INCLUDE 'doc-head-open.inc' %]
  <title>Koha: Overview Plugin: Overview</title>
+ <script type="text/javascript" src="[% PLUGIN_PATH %]/chartjs/Chart.bundle.min.js"></script>
 [% INCLUDE 'doc-head-close.inc' %]
 </head>
 <body>
