@@ -1,6 +1,5 @@
 package Koha::Plugin::No::Libriotech::Overview;
 
-## It's good practice to use Modern::Perl
 use Modern::Perl;
 
 ## Required for all plugins
@@ -88,17 +87,27 @@ sub items {
 
     my $template = $self->get_template({ file => 'items.tt' });
 
-    my $query = "SELECT it.description, i.itype, COUNT(*) AS count FROM items AS i, itemtypes AS it WHERE i.itype = it.itemtype GROUP BY itype";
-    my $sth = $dbh->prepare($query);
-    $sth->execute();
-    my $itypes = $sth->fetchall_arrayref({});
-
     $template->param(
-        'itypes' => $itypes,
+        'itemtypes'     => _group_and_count( 'i.itype', 'it.description', 'items AS i', 'itemtypes AS it', 'i.itype = it.itemtype' ),
+        'homebranch'    => _group_and_count( 'i.homebranch', 'b.branchname', 'items AS i', 'branches AS b', 'i.homebranch = b.branchcode' ),
+        'holdingbranch' => _group_and_count( 'i.holdingbranch', 'b.branchname', 'items AS i', 'branches AS b', 'i.holdingbranch = b.branchcode' ),
     );
 
     print $cgi->header();
     print $template->output();
+}
+
+sub _group_and_count {
+
+    my ( $alt, $name, $first, $second, $where ) = @_;
+
+    my $query = "SELECT $alt AS alt, $name AS name, COUNT(*) AS count FROM $first, $second WHERE $where GROUP BY $alt";
+    my $sth = $dbh->prepare($query);
+    $sth->execute();
+    my $data = $sth->fetchall_arrayref({});
+
+    return $data;
+
 }
 
 sub _count_table {

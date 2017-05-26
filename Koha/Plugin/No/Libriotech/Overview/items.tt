@@ -11,10 +11,21 @@
 <div id="doc3">
     <h3>Items</h3>
 
+[% BLOCK grouped_list %]
 <ul class="list-group" style="width: 30%;">
-  [% FOREACH i IN itypes %]
-  <li class="list-group-item"><span class="badge">[% i.count %]</span>[% i.description %]</li>
+  [% FOREACH d IN data %]
+  <li class="list-group-item"><span class="badge">[% d.count %]</span>[% d.name %] ([% d.alt %])</li>
   [% END %]
 </ul>
+[% END %]
+
+<h4>Itemtypes</h4>
+[% PROCESS grouped_list data=itemtypes %]
+
+<h4>Homebranch</h4>
+[% PROCESS grouped_list data=homebranch %]
+
+<h4>Holdingbranch</h4>
+[% PROCESS grouped_list data=holdingbranch %]
 
 [% INCLUDE 'intranet-bottom.inc' %]
