@@ -1,6 +1,15 @@
 [% INCLUDE 'doc-head-open.inc' %]
- <title>Koha: Overview Plugin: Items</title>
+<title>Koha: Overview Plugin: Items</title>
+<script type="text/javascript" src="[% PLUGIN_PATH %]/chartjs/Chart.bundle.min.js"></script>
 [% INCLUDE 'doc-head-close.inc' %]
+<script>
+
+// https://stackoverflow.com/questions/25594478/different-color-for-each-bar-in-a-bar-chart-chartjs
+var randomColorGenerator = function () {
+    return '#' + (Math.random().toString(16) + '0000000').slice(2, 8);
+};
+
+</script>
 </head>
 <body>
 [% INCLUDE 'header.inc' %]

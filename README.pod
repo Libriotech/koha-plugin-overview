@@ -32,6 +32,10 @@ To set up the Koha plugin system you must first make some changes to your instal
 Once set up is complete you will need to alter your UseKohaPlugins system 
 preference. On th Reports page you will see the Reports Plugins.
 
+=head1 CREDITS
+
+Chart.js: http://www.chartjs.org/
+
 =head1 LICENSE
 
 See the LICENSE file.
