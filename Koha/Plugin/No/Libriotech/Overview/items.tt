@@ -21,20 +21,70 @@ var randomColorGenerator = function () {
     <h3>Items</h3>
 
 [% BLOCK grouped_list %]
-<ul class="list-group" style="width: 30%;">
-  [% FOREACH d IN data %]
-  <li class="list-group-item"><span class="badge">[% d.count %]</span>[% d.name %] ([% d.alt %])</li>
-  [% END %]
-</ul>
+<div class="row">
+    <div class="col-md-6">
+        <ul class="list-group" style="width: 30%;">
+          [% FOREACH d IN data %]
+          <li class="list-group-item"><span class="badge">[% d.count %]</span>[% d.name %] ([% d.alt %])</li>
+          [% END %]
+        </ul>
+    </div>
+    <div class="col-md-6">
+        <div id="canvas-holder-[% slug %]" style="height:200px; width:200px">
+            <canvas id="chart-area-[% slug %]" />
+        </div>
+    </div>
+</div>
+
+<script>
+var [% slug %]config = {
+    type: 'pie',
+    data: {
+        datasets: [{
+            data: [
+                [% FOREACH d IN data %]
+                    [% d.count %],
+                [% END %]
+            ],
+            backgroundColor: [
+                [% FOREACH d IN data %]
+                    randomColorGenerator(),
+                [% END %]
+            ],
+            label: '[% slug %]'
+        }],
+        labels: [
+            [% FOREACH d IN data %]
+                '[% d.name %]',
+            [% END %]
+        ]
+    },
+    options: {
+        responsive: true,
+        legend: {
+            position: 'right',
+        },
+    }
+};
+</script>
 [% END %]
 
 <h4>Itemtypes</h4>
-[% PROCESS grouped_list data=itemtypes %]
+[% PROCESS grouped_list data=itemtypes slug="itemtypes" %]
 
 <h4>Homebranch</h4>
-[% PROCESS grouped_list data=homebranch %]
+[% PROCESS grouped_list data=homebranch slug="homebranch" %]
 
 <h4>Holdingbranch</h4>
-[% PROCESS grouped_list data=holdingbranch %]
+[% PROCESS grouped_list data=holdingbranch slug="holdingbranch" %]
+
+<script>
+window.onload = function() {
+[% FOREACH type IN [ 'itemtypes' 'homebranch' 'holdingbranch' ] %]
+    var ctx[% type %] = document.getElementById("chart-area-[% type %]").getContext("2d");
+    window.[% type %]Graph = new Chart(ctx[% type %], [% type %]config);
+[% END %]
+};
+</script>
 
 [% INCLUDE 'intranet-bottom.inc' %]
