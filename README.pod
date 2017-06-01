@@ -29,6 +29,17 @@ To set up the Koha plugin system you must first make some changes to your instal
 
 =back
 
+Add this to your Apache config, e.g. /etc/apache2/sites-enabled/<instance>.conf:
+
+   Alias /plugin/ "/var/lib/koha/<instance>/plugins/"
+   <Directory /var/lib/koha/<instance>/plugins/>
+      Options Indexes FollowSymLinks
+      AllowOverride None
+      Require all granted
+   </Directory>
+
+Replace <instance> with the actual name of your instance.
+
 Once set up is complete you will need to alter your UseKohaPlugins system 
 preference. On th Reports page you will see the Reports Plugins.
 
